@@ -9,5 +9,4 @@ public class SentenceLearningApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(SentenceLearningApplication.class, args);
 	}
-
 }
