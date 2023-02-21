@@ -1,35 +1,50 @@
 <!DOCTYPE html>
 
 <html
-    lang="en"
-    xmlns:th="http://www.thymeleaf.org"
-    xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>기본 문서</title>
+        lang="en"
+        xmlns:th="http://www.thymeleaf.org"
+>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>기본 문서</title>
+    <style>
+      body {
+        margin: 0 auto;
+        max-width: 800px;
+      }
+      main {
+        width: 80%;
+        margin: 0 auto;
+      }
+    </style>
+</head>
 
-    </head>
-    <body>
-        <div th:replace="fragments/layout :: header"></div>
-        <table border="1">
-            <tbody>
-                <script>
-                    for (var i = 1; i <= 80; i++) {
+<body>
+<div style="center">
+    <div th:replace="fragments/layout :: header"></div>
+    <br><br><br><br>
+    <table border="1" style="margin-left: auto; margin-right: auto; text-align: center;">
+        <tbody>
+        <script>
+                    for (var i = 1; i <= 100; i++) {
                         if (i % 10 === 1) {
                             document.write('<tr>');
                         }
                         document.write('<td>' + i + '</td>');
-                        if (i % 10 === 0) {
+                        if (i % 5 === 0) {
                             document.write('</tr>');
                         }
                     }
-                </script>
-            </tbody>
-        </table>
+        </script>
+        </tbody>
+    </table>
 
-        <div th:replace="fragments/layout :: footer"></div>
-    </body>
+    <br><br><br><br>
+    <div th:replace="fragments/layout :: footer"></div>
+
+</div>
+</body>
 
 </html>
