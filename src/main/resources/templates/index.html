@@ -1,14 +1,13 @@
 <!DOCTYPE html>
-
 <html
         lang="en"
         xmlns:th="http://www.thymeleaf.org"
 >
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>기본 문서</title>
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <title>ai 문장 정리</title>
     <style>
       body {
         margin: 0 auto;
@@ -18,31 +17,45 @@
         width: 80%;
         margin: 0 auto;
       }
+
     </style>
 </head>
 
 <body>
+<script src="/static/hanja.js"></script>
+
 <div style="center">
-    <div th:replace="fragments/layout :: header"></div>
+    <div th:replace="~{fragments/layout :: header}"></div>
     <br><br><br><br>
     <table border="1" style="margin-left: auto; margin-right: auto; text-align: center;">
         <tbody>
-        <script>
-                    for (var i = 1; i <= 100; i++) {
-                        if (i % 10 === 1) {
-                            document.write('<tr>');
-                        }
-                        document.write('<td>' + i + '</td>');
-                        if (i % 5 === 0) {
-                            document.write('</tr>');
-                        }
-                    }
-        </script>
+        <tr>
+            <td>번호</td>
+            <td>한자</td>
+            <td>뜻</td>
+            <td>음독</td>
+            <td>훈독</td>
+            <td>문장</td>
+            <td>후리가나</td>
+            <td>번역</td>
+            <td>기타</td>
+        </tr>
+        <tr th:each="ai, num: ${kanjilist}">
+            <td th:text="${num.count}"></td>
+            <td th:text="${ai.kanji}"></td>
+            <td th:text=""></td>
+            <td th:text="${ai.mean}"></td>
+            <td th:text="${ai.mean}"></td>
+            <td th:text="1"></td>
+            <td th:text="2"></td>
+            <td th:text="3"></td>
+            <td th:text="4"></td>
+        </tr>
         </tbody>
     </table>
 
     <br><br><br><br>
-    <div th:replace="fragments/layout :: footer"></div>
+    <div th:replace="~{fragments/layout :: footer}"></div>
 
 </div>
 </body>
