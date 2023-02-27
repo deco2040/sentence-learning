@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>한자 정보</title>
+    <style>
+      body {
+        margin: 0 auto;
+        max-width: 1200px;
+      }
+      .bold-text {
+      font-weight: bold;
+    }
+    </style>
+    <script type="text/javascript" th:src="@{/hanja.js}"></script>
+</head>
+<body>
+    <div style="center">
+        <div th:replace="~{fragments/layout :: header}"></div>
+        <br><br><br><br>
+        <table border="1" style="margin-left: auto; margin-right: auto; text-align: center;">
+            <tr>
+                <td><b>한자 번호</b></td>
+                <td><b>한자</b></td>
+                <td><b>뜻</b></td>
+            </tr>
+            <tr>
+                <td th:text="${id}"></td>
+                <td th:text="${meanVO.kanji}"></td>
+                <td>
+                    <script th:inline="javascript">
+                        var hanja = [[${meanVO.kanji}]];
+                        var mean = hanjaDic[hanja];
+                        if (mean) {
+                            document.write(mean[0].def + " ");
+                            document.write(mean[0].kor);
+                        } else {
+                            document.write("없음");
+                        }
+                    </script>
+                </td>
+            </tr>
+        </table>
+        <br>
+        <table border="1" style="margin-left: auto; margin-right: auto; text-align: center;">
+            <tr>
+                <td><b>문장</b></td>
+                <td><b>후리가나</b></td>
+                <td><b>해석</b></td>
+            </tr>
+            <tr>
+                <td th:utext="${meanVO.sentence}"></td>
+                <td th:utext="${meanVO.furigana}"></td>
+                <td th:utext="${meanVO.translate}"></td>
+            </tr>
+        </table>
+        <br>
+        <button onclick="history.back()">뒤로가기</button>
+        <button th:onclick="'location.reload();'">새로고침</button>
+
+        <br><br><br><br>
+        <div th:replace="~{fragments/layout :: footer}"></div>
+    </div>
+</body>
+</html>
