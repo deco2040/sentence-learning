@@ -11,53 +11,56 @@
     <style>
       body {
         margin: 0 auto;
-        max-width: 800px;
+        max-width: 1200px;
       }
-      main {
-        width: 80%;
-        margin: 0 auto;
-      }
-
     </style>
+    <script type="text/javascript" th:src="@{/hanja.js}"></script>
 </head>
-
 <body>
-<script src="/static/hanja.js"></script>
 
 <div style="center">
     <div th:replace="~{fragments/layout :: header}"></div>
     <br><br><br><br>
     <table border="1" style="margin-left: auto; margin-right: auto; text-align: center;">
-        <tbody>
         <tr>
-            <td>번호</td>
-            <td>한자</td>
-            <td>뜻</td>
-            <td>음독</td>
-            <td>훈독</td>
-            <td>문장</td>
-            <td>후리가나</td>
-            <td>번역</td>
-            <td>기타</td>
+            <td><b>번호</b></td>
+            <td><b>한자</b></td>
+            <td><b>뜻</b></td>
+            <td><b>음독</b></td>
+            <td><b>훈독</b></td>
+            <td><b>자세히 보기</b></td>
         </tr>
+        <tbody id = "kanji_table">
         <tr th:each="ai, num: ${kanjilist}">
-            <td th:text="${num.count}"></td>
-            <td th:text="${ai.kanji}"></td>
-            <td th:text=""></td>
-            <td th:text="${ai.mean}"></td>
-            <td th:text="${ai.mean}"></td>
-            <td th:text="1"></td>
-            <td th:text="2"></td>
-            <td th:text="3"></td>
-            <td th:text="4"></td>
+            <form th:action="@{/details}" method="get">
+                <td th:text="${num.count}"></td>
+                <td th:text="${ai.kanji}"></td>
+                <td>
+                    <script th:inline="javascript">
+                        var hanja = [[${ai.kanji}]];
+                        var mean = hanjaDic[hanja];
+                        if (mean) {
+                            document.write(mean[0].def + " ");
+                            document.write(mean[0].kor);
+                        } else {
+                            document.write("없음");
+                        }
+                    </script>
+                </td>
+                <td th:text="${ai.onndoku}"></td>
+                <td th:text="${ai.kunndoku}"></td>
+                <td>
+                    <button type="submit">이동하기</button>
+                    <input type="hidden" th:name="id" th:value="${num.count}"/>
+                </td>
+            </form>
         </tr>
         </tbody>
     </table>
 
     <br><br><br><br>
     <div th:replace="~{fragments/layout :: footer}"></div>
-
 </div>
-</body>
 
+</body>
 </html>
